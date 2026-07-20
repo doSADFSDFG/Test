@@ -1,0 +1,26 @@
+name: Python FastAPI CI             # 파이프라인 로봇의 이름
+
+on:
+  push:
+    branches: [ "main" ]            # 1. 트리거: main 브랜치에 코드가 밀려 들어오면 가동!
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest          # 2. 직무 환경: 깃허브야, 최신 우분투 리눅스 가상 컴퓨터 한 대 빌려줘!
+
+    steps:                          # 3. 단계별 행동 지침
+    - name: 코드를 가상 컴퓨터로 복사하기
+      uses: actions/checkout@v4
+
+    - name: 파이썬 3.11 세팅하기
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: 필요한 라이브러리 설치하기
+      run: |
+        pip install pytest fastapi httpx
+
+    - name: 🔥 [핵심] 로컬에서 치던 테스트 명령어 자동 실행!
+      run: |
+        pytest -q
