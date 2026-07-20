@@ -8,3 +8,6 @@ hello world!
 
 
 후후후
+
+
+B 모델 도입
